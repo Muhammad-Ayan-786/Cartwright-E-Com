@@ -2,6 +2,13 @@ import UserModel from "../models/user.model.js"
 import bcrypt from "bcryptjs"
 import { generateTokens, verifyRefreshToken } from "../utils/auth.utils.js"
 
+const refreshCookieOptions = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production',
+  sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+  path: '/'
+}
+
 
 /**
  * @description Register an user and save the data from req.body
@@ -40,7 +47,7 @@ export const registerController = async (req, res) => {
     refreshToken
   } = generateTokens({ userId: user._id, role: user.role })
 
-  res.cookie("refreshToken", refreshToken, { httpOnly: true })
+  res.cookie("refreshToken", refreshToken, refreshCookieOptions)
 
   await UserModel.findByIdAndUpdate(user._id, { refreshToken })
 
@@ -91,7 +98,7 @@ export const loginController = async (req, res) => {
     refreshToken
   } = generateTokens({ userId: user._id, role: user.role })
 
-  res.cookie("refreshToken", refreshToken, { httpOnly: true })
+  res.cookie("refreshToken", refreshToken, refreshCookieOptions)
 
   await UserModel.findByIdAndUpdate(user._id, { refreshToken })
 
@@ -137,7 +144,7 @@ export const refreshController = async (req, res) => {
         refreshToken: null
       })
 
-      res.clearCookie("refreshToken", { httpOnly: true })
+      res.clearCookie("refreshToken", refreshCookieOptions)
 
       return res.status(401).json({
         message: "Refresh token mismatch"
@@ -149,7 +156,7 @@ export const refreshController = async (req, res) => {
       refreshToken: newRefreshToken
     } = generateTokens({ userId, role })
 
-    res.cookie("refreshToken", newRefreshToken, { httpOnly: true })
+    res.cookie("refreshToken", newRefreshToken, refreshCookieOptions)
 
     await UserModel.findByIdAndUpdate(user._id, { refreshToken: newRefreshToken })
 
@@ -215,7 +222,7 @@ export const logoutController = async (req, res) => {
 
   await UserModel.findByIdAndUpdate(userId, { refreshToken: null })
 
-  res.clearCookie("refreshToken", { httpOnly: true })
+  res.clearCookie("refreshToken", refreshCookieOptions)
 
   return res.status(200).json({
     message: "Logged out successfully"
