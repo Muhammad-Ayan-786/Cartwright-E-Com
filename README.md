@@ -36,6 +36,7 @@ MONGO_URI=mongodb://127.0.0.1:27017/cartwright_ecom
 ACCESS_TOKEN_SECRET=replace_with_a_long_random_secret
 REFRESH_TOKEN_SECRET=replace_with_another_long_random_secret
 IMAGEKIT_PRIVATE_KEY=your_imagekit_private_key
+FRONTEND_URL=http://localhost:5173
 ```
 
 Set `MONGO_URI` to your MongoDB connection string. Keep the ImageKit private key and token secrets on the server; do not commit real secrets.
