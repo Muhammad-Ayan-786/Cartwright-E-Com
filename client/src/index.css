@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+@import 'tailwindcss';
+
+@theme {
+  --animate-auth-orbit: auth-orbit 28s linear infinite;
+  --animate-auth-orbit-reverse: auth-orbit 22s linear infinite reverse;
+  --animate-auth-float: auth-float 3s ease-in-out infinite;
+  --animate-auth-float-reverse: auth-float 3.4s ease-in-out infinite reverse;
+  --animate-auth-bob: auth-bob 3s ease-in-out infinite;
+  --animate-auth-shadow: auth-shadow 3s ease-in-out infinite;
+  --animate-auth-twinkle: auth-twinkle 2s ease-in-out infinite;
+  --animate-auth-wiggle: auth-wiggle 5s ease-in-out infinite;
+  --animate-auth-pulse: auth-pulse 1.5s ease-in-out infinite;
+  --animate-auth-progress: auth-progress 1.8s cubic-bezier(.65,0,.35,1) infinite;
+  --animate-auth-dots: auth-dots 1.1s steps(4,end) infinite;
+  --animate-auth-enter: auth-enter .7s cubic-bezier(.2,.8,.2,1) both;
+
+  @keyframes auth-orbit { to { transform: translate(-50%, -50%) rotate(360deg); } }
+  @keyframes auth-bob { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-13px) rotate(2deg); } }
+  @keyframes auth-shadow { 0%, 100% { transform: scaleX(1); opacity: .8; } 50% { transform: scaleX(.8); opacity: .48; } }
+  @keyframes auth-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -9px; } }
+  @keyframes auth-twinkle { 0%, 100% { opacity: .45; scale: .8; rotate: 0deg; } 50% { opacity: 1; scale: 1.18; rotate: 24deg; } }
+  @keyframes auth-wiggle { 0%, 85%, 100% { rotate: 12deg; } 90% { rotate: 22deg; } 95% { rotate: 5deg; } }
+  @keyframes auth-pulse { 50% { opacity: .45; box-shadow: 0 0 3px var(--color-primary); } }
+  @keyframes auth-progress { 0% { transform: translateX(-110%); } 100% { transform: translateX(320%); } }
+  @keyframes auth-dots { 0% { opacity: .25; } 50% { opacity: 1; } 100% { opacity: .25; } }
+  @keyframes auth-enter { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+}
+
+
+:root {
+  --color-primary: #E05338;
+  --color-primary-hover: #c8442b;
+  --color-secondary: #1E3A8A;
+  --color-secondary-hover: #162b68;
+  --color-tertiary: #F3EFEA;
+  --color-neutral: #1A1A1A;
+  --color-neutral-muted: #6B7280;
+  --color-input-bg: #F8F7F5;
+  --color-canvas: #ECE8E1;
+
+  --font-headline: 'Newsreader', Georgia, serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-secondary) transparent;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-neutral);
+  background-color: var(--color-canvas);
+}
+
+.font-headline {
+  font-family: var(--font-headline);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.bg-primary-var {
+  background-color: var(--color-primary);
+}
+
+.bg-primary-hover:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.text-primary-var {
+  color: var(--color-primary);
+}
+
+.bg-secondary-var {
+  background-color: var(--color-secondary);
+}
+
+.text-secondary-var {
+  color: var(--color-secondary);
+}
+
+.bg-tertiary-var {
+  background-color: var(--color-tertiary);
+}
+
+.text-neutral-var {
+  color: var(--color-neutral);
+}
+
+.bg-input-var {
+  background-color: var(--color-input-bg);
+}
+
+
+/* Custom Scrollbar */
+html::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: var(--color-secondary);
+  border: 1px solid transparent;
+  border-radius: 999px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-hover);
+}
